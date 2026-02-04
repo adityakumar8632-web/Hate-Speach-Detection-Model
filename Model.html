@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced AI-powered hate speech detection tool. Analyze text for toxicity, threats, insults, and identity attacks with real-time scoring.">
+    <meta name="keywords" content="hate speech detection, toxicity analysis, content moderation, AI text analysis">
+    <meta name="author" content="Hate Speech Detector">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourapp.com/">
+    <meta property="og:title" content="Hate Speech Detector - AI-Powered Content Analysis">
+    <meta property="og:description" content="Professional-grade hate speech detection using advanced AI. Analyze text for toxicity, threats, and harmful content in seconds.">
+    <meta property="og:image" content="https://yourapp.com/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourapp.com/">
+    <meta property="twitter:title" content="Hate Speech Detector - AI-Powered Content Analysis">
+    <meta property="twitter:description" content="Professional-grade hate speech detection using advanced AI. Analyze text for toxicity, threats, and harmful content in seconds.">
+    <meta property="twitter:image" content="https://yourapp.com/og-image.jpg">
+
+    <title>Hate Speech Detector - AI-Powered Content Analysis</title>
+    <link rel="stylesheet" href="Model.css">
+</head>
+<body>
+    <!-- Offline Banner -->
+    <div id="offline-banner" class="offline-banner hidden">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+            <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+            <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+            <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+            <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+            <line x1="12" y1="20" x2="12.01" y2="20"></line>
+        </svg>
+        <span>No Internet Connection</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-header">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <path d="M12 8v4"></path>
+                    <path d="M12 16h.01"></path>
+                </svg>
+                <span class="brand-text">SafeGuard</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active" data-page="home">Home</a>
+                <a href="#analyze" class="nav-link" data-page="analyze">Analyze</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div id="toast-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <section id="home-page" class="page active">
+            <div class="hero-section">
+                <div class="hero-content reveal-on-scroll">
+                    <div class="hero-badge">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>AI-Powered Detection</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Protect Your<br>
+                        <span class="gradient-text">Digital Space</span>
+                    </h1>
+                    <p class="hero-description">
+                        Advanced machine learning algorithms analyze text content in real-time, 
+                        detecting toxicity, threats, and harmful speech with professional-grade accuracy.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="navigateToAnalyze()">
+                            <span>Start Analysis</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                        <button class="btn btn-secondary" onclick="scrollToFeatures()">
+                            <span>Learn More</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual reveal-on-scroll reveal-delay-1">
+                    <div class="floating-card card-1">
+                        <div class="card-header">
+                            <div class="status-dot status-safe"></div>
+                            <span class="card-label">Content Safe</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="progress-fill safe"></div>
+                        </div>
+                    </div>
+                    <div class="floating-card card-2">
+                        <div class="card-header">
+                            <div class="status-dot status-warning"></div>
+                            <span class="card-label">Analyzing...</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="progress-fill warning"></div>
+                        </div>
+                    </div>
+                    <div class="floating-card card-3">
+                        <div class="card-header">
+                            <div class="status-dot status-danger"></div>
+                            <span class="card-label">Alert Detected</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="progress-fill danger"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features-section" id="features">
+                <h2 class="section-title reveal-on-scroll">Advanced Detection Capabilities</h2>
+                <div class="features-grid">
+                    <div class="feature-card reveal-on-scroll">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Real-Time Analysis</h3>
+                        <p class="feature-description">Instant feedback on content toxicity with detailed category breakdowns and confidence scores.</p>
+                    </div>
+                    <div class="feature-card reveal-on-scroll reveal-delay-1">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="3" y1="9" x2="21" y2="9"></line>
+                                <line x1="9" y1="21" x2="9" y2="9"></line>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Multi-Category Detection</h3>
+                        <p class="feature-description">Identifies toxicity, identity attacks, insults, profanity, and threats with precision scoring.</p>
+                    </div>
+                    <div class="feature-card reveal-on-scroll reveal-delay-2">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Enterprise Security</h3>
+                        <p class="feature-description">Built with security best practices, API key protection, and comprehensive error handling.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analyze Page -->
+        <section id="analyze-page" class="page">
+            <div class="analyze-container">
+                <div class="analyze-header">
+                    <h2 class="page-title">Analyze Content</h2>
+                    <p class="page-subtitle">Enter text below to check for potential hate speech, toxicity, and harmful content</p>
+                </div>
+
+                <div class="input-section">
+                    <div class="textarea-wrapper">
+                        <textarea 
+                            id="text-input" 
+                            class="text-input" 
+                            placeholder="Paste or type the text you want to analyze..."
+                            maxlength="5000"
+                            rows="8"
+                        ></textarea>
+                        <div class="char-counter">
+                            <span id="char-count">0</span><span class="char-limit"> / 5000</span>
+                        </div>
+                    </div>
+
+                    <div class="input-actions">
+                        <button class="btn btn-clear" id="clear-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                            <span>Clear</span>
+                        </button>
+                        <button class="btn btn-primary" id="analyze-btn">
+                            <span id="btn-text">Analyze Text</span>
+                            <svg id="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Page -->
+        <section id="results-page" class="page">
+            <div class="results-container">
+                <!-- Skeleton Loading State -->
+                <div id="skeleton-loader" class="skeleton-loader">
+                    <div class="skeleton-header">
+                        <div class="skeleton skeleton-icon"></div>
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-subtitle"></div>
+                    </div>
+                    <div class="skeleton-scores">
+                        <div class="skeleton-score-card">
+                            <div class="skeleton skeleton-circle"></div>
+                            <div class="skeleton skeleton-text"></div>
+                        </div>
+                        <div class="skeleton-score-card">
+                            <div class="skeleton skeleton-circle"></div>
+                            <div class="skeleton skeleton-text"></div>
+                        </div>
+                        <div class="skeleton-score-card">
+                            <div class="skeleton skeleton-circle"></div>
+                            <div class="skeleton skeleton-text"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actual Results Content -->
+                <div id="results-content" class="results-content hidden">
+                    <!-- Verdict Header -->
+                    <div class="verdict-header">
+                        <div class="verdict-icon" id="verdict-icon">
+                            <!-- Icon will be injected by JS -->
+                        </div>
+                        <h2 class="verdict-title" id="verdict-title">Analysis Complete</h2>
+                        <p class="verdict-subtitle" id="verdict-subtitle">Detailed breakdown below</p>
+                    </div>
+
+                    <!-- Overall Score -->
+                    <div class="overall-score-section">
+                        <h3 class="section-heading">Overall Toxicity Score</h3>
+                        <div class="overall-score-card">
+                            <div class="circular-progress" id="overall-progress">
+                                <svg class="progress-ring" width="160" height="160">
+                                    <circle class="progress-ring-bg" cx="80" cy="80" r="70"></circle>
+                                    <circle class="progress-ring-fill" cx="80" cy="80" r="70" id="overall-circle"></circle>
+                                </svg>
+                                <div class="progress-value">
+                                    <span class="progress-number" id="overall-percentage">0</span>
+                                    <span class="progress-symbol">%</span>
+                                </div>
+                            </div>
+                            <div class="score-label" id="overall-label">Calculating...</div>
+                        </div>
+                    </div>
+
+                    <!-- Category Breakdown -->
+                    <div class="categories-section">
+                        <h3 class="section-heading">Category Breakdown</h3>
+                        <div class="categories-grid" id="categories-grid">
+                            <!-- Categories will be injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Action Hub -->
+                    <div class="action-hub">
+                        <button class="btn btn-secondary" id="copy-report-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <span>Copy Report</span>
+                        </button>
+                        <button class="btn btn-outline" id="flag-review-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                                <line x1="4" y1="22" x2="4" y2="15"></line>
+                            </svg>
+                            <span>Flag for Review</span>
+                        </button>
+                        <button class="btn btn-primary" id="new-analysis-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="23 4 23 10 17 10"></polyline>
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                            </svg>
+                            <span>New Analysis</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
